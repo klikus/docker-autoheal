@@ -59,11 +59,11 @@ get_container_info() {
   fi
   if [ "$AUTOHEAL_ONLY_MONITOR_RUNNING" = false ]
   then
-    running_filter=""
+    running_filter="&all=true"
   else
-    running_filter=",\"status\":\[\"running\"\]"
+    running_filter=""
   fi
-  url="${HTTP_ENDPOINT}/containers/json?filters=\{\"health\":\[\"unhealthy\"\]${label_filter}${running_filter}\}"
+  url="${HTTP_ENDPOINT}/containers/json?filters=\{\"health\":\[\"unhealthy\"\]${label_filter}\}${running_filter}"
   docker_curl "$url"
 }
 
