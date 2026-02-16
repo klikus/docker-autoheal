@@ -89,6 +89,12 @@ notify_webhook() {
     # execute webhook requests as background process to prevent healer from blocking
     curl -s -X POST -H "Content-type: application/json" -d "$(generate_apprise_payload $text)"  "$APPRISE_URL"
   fi
+
+  if [ -n "$GOTIFY_URL" ]
+  then
+    # execute webhook requests as background process to prevent healer from blocking
+    curl -s -X POST -H "Content-type: application/json" -d "$(generate_gotify_payload $text)"  "$GOTIFY_URL"
+  fi
 }
 
 notify_post_restart_script() {
@@ -115,6 +121,15 @@ generate_apprise_payload() {
 {
   "title":"Autoheal",
   "body":"$text"
+}
+EOF
+}
+generate_gotify_payload() {
+  local text="$@"
+  cat <<EOF
+{
+  "title":"Autoheal",
+  "message":"$text"
 }
 EOF
 }

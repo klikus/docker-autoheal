@@ -15,6 +15,7 @@ ENV AUTOHEAL_CONTAINER_LABEL=autoheal \
     WEBHOOK_URL="" \
     WEBHOOK_JSON_KEY="content" \
     APPRISE_URL="" \
+    GOTIFY_URL="" \
     POST_RESTART_SCRIPT=""
 
 COPY docker-entrypoint /
